@@ -13,6 +13,7 @@ import com.helder.cursoSpring.model.Cidade;
 import com.helder.cursoSpring.model.Cliente;
 import com.helder.cursoSpring.model.Endereco;
 import com.helder.cursoSpring.model.Estado;
+import com.helder.cursoSpring.model.ItemPedido;
 import com.helder.cursoSpring.model.Pagamento;
 import com.helder.cursoSpring.model.PagamentoComBoleto;
 import com.helder.cursoSpring.model.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.helder.cursoSpring.repositories.CidadeRepository;
 import com.helder.cursoSpring.repositories.ClienteRepository;
 import com.helder.cursoSpring.repositories.EnderecoRepository;
 import com.helder.cursoSpring.repositories.EstadoRepository;
+import com.helder.cursoSpring.repositories.ItemPedidoRepository;
 import com.helder.cursoSpring.repositories.PagamentoRepository;
 import com.helder.cursoSpring.repositories.PedidoRepository;
 import com.helder.cursoSpring.repositories.ProdutoRepository;
@@ -56,6 +58,9 @@ public class CursoSpringApplication implements CommandLineRunner{ // CommandLine
 	@Autowired
 	PagamentoRepository pagamentoRepository;
 	
+	@Autowired
+	ItemPedidoRepository itemPedidoRepository;
+		
 	public static void main(String[] args) {
 		SpringApplication.run(CursoSpringApplication.class, args);
 	}
@@ -120,8 +125,19 @@ public class CursoSpringApplication implements CommandLineRunner{ // CommandLine
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 	}
-	
-	
-
 }
