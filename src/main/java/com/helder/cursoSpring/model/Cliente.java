@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.helder.cursoSpring.model.enums.TipoCliente;
 
@@ -39,6 +40,7 @@ public class Cliente implements Serializable {
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>(); // É um conjunto que n aceita repetição, porque se foce usar uma List ela aceitaria repetir
 	
+	@JsonBackReference //não permite serializar os pedidos do cliente
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 	

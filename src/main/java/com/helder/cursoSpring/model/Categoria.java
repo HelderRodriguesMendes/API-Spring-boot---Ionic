@@ -22,7 +22,7 @@ public class Categoria implements Serializable{
 	private Integer id;
 	private String nome;
 	
-	@JsonManagedReference //para fazer a busca de produtos sem cair em um LOOP
+	@JsonManagedReference //permite serializar os produtos da categoria
 	@ManyToMany(mappedBy="categorias") // chave estrangeira apontando para as configurações da chave estrangeira da classe Produto, pois é assuciação MUITOS para MUITOS
 	private List<Produto> produtos = new ArrayList<>();
 	
