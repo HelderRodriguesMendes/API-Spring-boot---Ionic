@@ -24,6 +24,11 @@ public class CategoriaService {
 	public Categoria insert(Categoria categoria) {
 		categoria.setId(null); //PARA GARANTIR QUE É UMA NOVA CATEGORIA, COM ID NULL
 		return categoriaRepository.save(categoria);
+	}
+
+	public Categoria update(Categoria categoria) {
+		find(categoria.getId());
+		return categoriaRepository.save(categoria);
 	} 
 	
 }

@@ -25,7 +25,7 @@ public class ClienteResource {
 	private ClienteRepository clienteRepository;
 	
 	@RequestMapping(value= "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) { // a anotação @PathVariable é para o spring envia o id que recebeu na requisição, para o metodo FIND
+	public ResponseEntity<Cliente> find(@PathVariable Integer id) { // a anotação @PathVariable é para o spring envia o id que recebeu na requisição, para o metodo FIND
 		
 		Cliente obj = service.find(id);
 		
