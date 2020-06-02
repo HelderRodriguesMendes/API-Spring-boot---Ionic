@@ -51,4 +51,11 @@ public class CategoriaResource {
 		categoria  = categoriaService.update(categoria);
 		return ResponseEntity.noContent().build(); //noContent: QUE A RESPONSA DA REQUISIÇÃO N TEM CONTEUDO, CORPO
 	}
+	
+	
+	@RequestMapping(value= "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		categoriaService.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 }
