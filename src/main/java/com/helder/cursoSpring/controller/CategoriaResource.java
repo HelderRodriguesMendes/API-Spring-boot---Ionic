@@ -1,6 +1,8 @@
 package com.helder.cursoSpring.controller;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.helder.cursoSpring.dto.CategoriaDTO;
 import com.helder.cursoSpring.model.Categoria;
 import com.helder.cursoSpring.services.CategoriaService;
 
@@ -57,5 +60,15 @@ public class CategoriaResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		categoriaService.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<CategoriaDTO>> findAll() { // a anotação @PathVariable é para o spring envia o id que recebeu na requisição, para o metodo FIND
+		
+		List<Categoria> list = categoriaService.findAll();
+						
+		List<CategoriaDTO> listDTO = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList()); //convertendo listas
+		
+		return ResponseEntity.ok().body(listDTO);		
 	}
 }
