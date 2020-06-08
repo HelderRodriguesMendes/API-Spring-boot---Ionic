@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.helder.cursoSpring.dto.CategoriaDTO;
 import com.helder.cursoSpring.model.Categoria;
 import com.helder.cursoSpring.repositories.CategoriaRepository;
 import com.helder.cursoSpring.services.exceptions.DataIntegrityException;
@@ -28,7 +29,7 @@ public class CategoriaService {
 		}
 
 	public Categoria insert(Categoria categoria) {
-		categoria.setId(null); //PARA GARANTIR QUE É UMA NOVA CATEGORIA, COM ID NULL
+		categoria.setId(null);
 		return categoriaRepository.save(categoria);
 	}
 
@@ -55,6 +56,10 @@ public class CategoriaService {
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return categoriaRepository.findAll(pageRequest);
+	}
+	
+	public Categoria fromDTO(CategoriaDTO categoriaDTO) {
+		return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
 	}
 	
 }
