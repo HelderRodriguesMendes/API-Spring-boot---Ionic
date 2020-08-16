@@ -57,7 +57,7 @@ public class CategoriaResource {
 		Categoria categoria = categoriaService.fromDTO(categoriaDTO);
 		categoria.setId(id);
 		categoria  = categoriaService.update(categoria);
-		return ResponseEntity.noContent().build(); //noContent: QUE A RESPONSA DA REQUISIÇÃO N TEM CONTEUDO, CORPO
+		return ResponseEntity.noContent().build();
 	}
 	
 	
@@ -68,7 +68,7 @@ public class CategoriaResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<CategoriaDTO>> findAll() { // a anotação @PathVariable é para o spring envia o id que recebeu na requisição, para o metodo FIND		
+	public ResponseEntity<List<CategoriaDTO>> findAll() {	
 		List<Categoria> list = categoriaService.findAll();						
 		List<CategoriaDTO> listDTO = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList()); //convertendo listas		
 		return ResponseEntity.ok().body(listDTO);		

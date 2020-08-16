@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.helder.cursoSpring.model.enums.EstadoPagamento;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class PagamentoComBoleto extends Pagamento {
 	
 	private static final long serialVersionUID = 1L;
@@ -30,25 +33,4 @@ public class PagamentoComBoleto extends Pagamento {
 		this.dataVencimento = dataVencimento;
 	}
 
-
-	public Date getDataVencimento() {
-		return dataVencimento;
-	}
-
-
-	public void setDataVencimento(Date dataVencimento) {
-		this.dataVencimento = dataVencimento;
-	}
-
-
-	public Date getDataPagamento() {
-		return dataPagamento;
-	}
-
-
-	public void setDataPagamento(Date dataPagamento) {
-		this.dataPagamento = dataPagamento;
-	}
-	
-	
 }
